@@ -8,7 +8,7 @@ from antlr4.error.ErrorListener import ConsoleErrorListener,ErrorListener
 from MCLexer import MCLexer
 from MCParser import MCParser
 from lexererr import *
-from Cau4ASTGeneration import ASTGeneration
+from Cau5ASTGeneration import ASTGeneration
 
 class TestUtil:
     @staticmethod

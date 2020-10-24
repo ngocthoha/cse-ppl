@@ -1,1 +1,1 @@
-None
+Binary(&&,True,False)

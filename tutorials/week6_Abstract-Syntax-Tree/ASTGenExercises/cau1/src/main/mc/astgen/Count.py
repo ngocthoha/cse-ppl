@@ -5,7 +5,7 @@ from AST import *
 class Count(MCVisitor):
     # program: vardecls EOF;
     def visitProgram(self,ctx:MCParser.ProgramContext):
-        return self.visit(ctx.vardecls()) + 1 
+        return self.visit(ctx.vardecls()) + 1
 
     # vardecls: vardecl vardecls | vardecl ;
     def visitVardecls(self,ctx:MCParser.VardeclsContext):

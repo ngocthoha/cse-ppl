@@ -1,1 +1,1 @@
-Program([FuncDecl(Id(main),[],<class 'AST.IntType'>,Block([CallExpr(Id(putIntLn),[IntLiteral(4)])]))])
+Program([VarDecl(a,IntType),VarDecl(b,ArrayType(IntType,3)),VarDecl(c,IntType)])

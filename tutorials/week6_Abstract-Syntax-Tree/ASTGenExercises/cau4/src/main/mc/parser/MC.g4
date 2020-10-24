@@ -24,11 +24,11 @@ options{
 	language=Python3;
 }
 
-exp: term COMPARE term | term ; // COMPARE is none-association
+exp: term COMPARE term | term; // COMPARE is none-association
 
 term: factor EXPONENT term | factor ; 
 
-factor: operand (ANDOR operand)* ; // ANDOR is left-association
+factor: operand (ANDOR operand)*; // ANDOR is left-association
 
 operand: INTLIT | BOOLIT | LB exp RB ;
 

@@ -19,4 +19,11 @@ class ASTGenSuite(unittest.TestCase):
         	Binary('>',Binary('^',IntLit(3),IntLit(4)),IntLit(5)),
         	Binary('<=',IntLit(4),Binary('^',IntLit(5),IntLit(2)))))
         self.assertTrue(TestAST.checkASTGen(input,expect,302))
-       
+
+    def test_simple_exp(self):
+        input = """5 && 6 || 7"""
+        expect = str(Binary('||',
+            Binary('&&',IntLit(5),IntLit(6)),
+            IntLit(7)))
+        self.assertTrue(TestAST.checkASTGen(input,expect,303))
+    
