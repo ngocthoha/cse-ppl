@@ -1,0 +1,1 @@
+0123456789,60,abcdefghijklmnopqrstuvwxyz,60,ABCDEFGHIJKLMNOPQRSTUVWXYZ,60,!#$%&()*+,-./:;<=>?@[]^_`{|}~,60, ,60,<EOF>

@@ -1,0 +1,8 @@
+
+Function: main
+    Body:
+        Var: a;
+        Var: b;
+        foo1();
+        foo2();
+    EndBody.

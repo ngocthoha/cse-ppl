@@ -1,0 +1,8 @@
+
+Function: main
+    Body:
+        a = a[1];
+        a = foo()[1];
+        a = foo(1,True,"",1.)[1];
+        a = foo(foo(foo()))[1];
+    EndBody.

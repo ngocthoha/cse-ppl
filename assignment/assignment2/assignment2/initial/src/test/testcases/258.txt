@@ -1,0 +1,9 @@
+
+Function: main
+    Body:
+        Do
+            foo();
+            foo();
+        While True
+        EndDo.
+    EndBody.

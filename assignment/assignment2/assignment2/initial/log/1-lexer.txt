@@ -1,0 +1,1074 @@
+Tests run  100
+Errors  [(<LexerSuite.LexerSuite testMethod=test_105>, 'Traceback (most recent call last):\n  File "./test/LexerSuite.py", line 38, in test_105\n    self.assertTrue(TestLexer.checkLexeme(input, expect, 105))\n  File "./test/TestUtils.py", line 32, in checkLexeme\n    TestLexer.printLexeme(dest,lexer)\n  File "./test/TestUtils.py", line 43, in printLexeme\n    tok = lexer.nextToken()\n  File "/home/ngoctho/.local/lib/python3.8/site-packages/antlr4/Lexer.py", line 144, in nextToken\n    self.emit()\n  File "../target/main/bkit/parser/BKITLexer.py", line 407, in emit\n    raise UnterminatedComment()\nNameError: name \'UnterminatedComment\' is not defined\n'), (<LexerSuite.LexerSuite testMethod=test_108>, 'Traceback (most recent call last):\n  File "./test/LexerSuite.py", line 53, in test_108\n    self.assertTrue(TestLexer.checkLexeme(input, expect, 108))\n  File "./test/TestUtils.py", line 32, in checkLexeme\n    TestLexer.printLexeme(dest,lexer)\n  File "./test/TestUtils.py", line 46, in printLexeme\n    TestLexer.printLexeme(dest,lexer)\n  File "./test/TestUtils.py", line 46, in printLexeme\n    TestLexer.printLexeme(dest,lexer)\n  File "./test/TestUtils.py", line 46, in printLexeme\n    TestLexer.printLexeme(dest,lexer)\n  File "./test/TestUtils.py", line 43, in printLexeme\n    tok = lexer.nextToken()\n  File "/home/ngoctho/.local/lib/python3.8/site-packages/antlr4/Lexer.py", line 144, in nextToken\n    self.emit()\n  File "../target/main/bkit/parser/BKITLexer.py", line 407, in emit\n    raise UnterminatedComment()\nNameError: name \'UnterminatedComment\' is not defined\n')]
+[(<LexerSuite.LexerSuite testMethod=test_106>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 43, in test_106\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 106))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_107>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 48, in test_107\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 107))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_109>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 58, in test_109\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 109))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_110>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 63, in test_110\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 110))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_111>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 68, in test_111\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 111))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_113>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 80, in test_113\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 113))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_114>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 85, in test_114\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 114))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_115>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 90, in test_115\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 115))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_116>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 95, in test_116\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 116))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_117>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 100, in test_117\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 117))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_118>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 105, in test_118\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 118))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_119>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 110, in test_119\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 119))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_120>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 115, in test_120\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 120))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_121>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 120, in test_121\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 121))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_122>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 125, in test_122\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 122))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_123>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 130, in test_123\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 123))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_124>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 135, in test_124\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 124))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_125>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 140, in test_125\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 125))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_126>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 145, in test_126\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 126))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_127>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 150, in test_127\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 127))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_128>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 155, in test_128\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 128))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_129>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 160, in test_129\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 129))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_130>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 165, in test_130\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 130))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_131>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 170, in test_131\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 131))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_132>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 175, in test_132\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 132))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_133>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 180, in test_133\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 133))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_134>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 185, in test_134\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 134))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_135>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 192, in test_135\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 135))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_136>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 197, in test_136\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 136))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_137>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 202, in test_137\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 137))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_138>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 207, in test_138\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 138))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_139>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 212, in test_139\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 139))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_140>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 217, in test_140\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 140))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_141>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 222, in test_141\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 141))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_142>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 229, in test_142\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 142))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_143>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 236, in test_143\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 143))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_144>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 241, in test_144\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 144))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_145>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 246, in test_145\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 145))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_146>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 251, in test_146\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 146))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_148>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 263, in test_148\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 148))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_149>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 268, in test_149\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 149))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_150>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 278, in test_150\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 150))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_151>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 283, in test_151\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 151))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_152>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 288, in test_152\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 152))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_153>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 293, in test_153\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 153))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_154>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 300, in test_154\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 154))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_155>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 305, in test_155\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 155))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_156>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 315, in test_156\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 156))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_157>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 320, in test_157\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 157))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_158>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 325, in test_158\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 158))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_159>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 330, in test_159\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 159))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_160>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 337, in test_160\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 160))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_161>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 342, in test_161\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 161))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_162>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 351, in test_162\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 162))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_163>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 356, in test_163\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 163))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_164>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 361, in test_164\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 164))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_165>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 366, in test_165\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 165))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_166>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 371, in test_166\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 166))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_167>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 389, in test_167\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 167))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_168>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 394, in test_168\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 168))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_169>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 399, in test_169\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 169))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_170>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 404, in test_170\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 170))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_171>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 409, in test_171\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 171))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_172>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 414, in test_172\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 172))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_173>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 419, in test_173\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 173))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_174>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 424, in test_174\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 174))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_175>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 429, in test_175\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 175))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_176>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 442, in test_176\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 176))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_177>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 447, in test_177\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 177))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_178>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 452, in test_178\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 178))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_179>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 457, in test_179\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 179))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_180>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 462, in test_180\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 180))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_181>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 469, in test_181\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 181))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_182>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 474, in test_182\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 182))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_183>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 479, in test_183\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 183))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_197>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 557, in test_197\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 197))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_198>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 562, in test_198\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 198))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_199>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 569, in test_199\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 199))\n'
+  'AssertionError: False is not true\n'),
+ (<LexerSuite.LexerSuite testMethod=test_200>,
+  'Traceback (most recent call last):\n'
+  '  File "./test/LexerSuite.py", line 598, in test_200\n'
+  '    self.assertTrue(TestLexer.checkLexeme(input, expect, 200))\n'
+  'AssertionError: False is not true\n')]
+Test output
+ ....EFFEFFF.FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.............FFFF
+======================================================================
+ERROR: test_105 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 38, in test_105
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 105))
+  File "./test/TestUtils.py", line 32, in checkLexeme
+    TestLexer.printLexeme(dest,lexer)
+  File "./test/TestUtils.py", line 43, in printLexeme
+    tok = lexer.nextToken()
+  File "/home/ngoctho/.local/lib/python3.8/site-packages/antlr4/Lexer.py", line 144, in nextToken
+    self.emit()
+  File "../target/main/bkit/parser/BKITLexer.py", line 407, in emit
+    raise UnterminatedComment()
+NameError: name 'UnterminatedComment' is not defined
+
+======================================================================
+ERROR: test_108 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 53, in test_108
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 108))
+  File "./test/TestUtils.py", line 32, in checkLexeme
+    TestLexer.printLexeme(dest,lexer)
+  File "./test/TestUtils.py", line 46, in printLexeme
+    TestLexer.printLexeme(dest,lexer)
+  File "./test/TestUtils.py", line 46, in printLexeme
+    TestLexer.printLexeme(dest,lexer)
+  File "./test/TestUtils.py", line 46, in printLexeme
+    TestLexer.printLexeme(dest,lexer)
+  File "./test/TestUtils.py", line 43, in printLexeme
+    tok = lexer.nextToken()
+  File "/home/ngoctho/.local/lib/python3.8/site-packages/antlr4/Lexer.py", line 144, in nextToken
+    self.emit()
+  File "../target/main/bkit/parser/BKITLexer.py", line 407, in emit
+    raise UnterminatedComment()
+NameError: name 'UnterminatedComment' is not defined
+
+======================================================================
+FAIL: test_106 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 43, in test_106
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 106))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_107 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 48, in test_107
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 107))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_109 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 58, in test_109
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 109))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_110 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 63, in test_110
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 110))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_111 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 68, in test_111
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 111))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_113 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 80, in test_113
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 113))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_114 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 85, in test_114
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 114))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_115 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 90, in test_115
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 115))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_116 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 95, in test_116
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 116))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_117 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 100, in test_117
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 117))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_118 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 105, in test_118
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 118))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_119 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 110, in test_119
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 119))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_120 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 115, in test_120
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 120))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_121 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 120, in test_121
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 121))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_122 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 125, in test_122
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 122))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_123 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 130, in test_123
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 123))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_124 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 135, in test_124
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 124))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_125 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 140, in test_125
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 125))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_126 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 145, in test_126
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 126))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_127 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 150, in test_127
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 127))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_128 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 155, in test_128
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 128))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_129 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 160, in test_129
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 129))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_130 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 165, in test_130
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 130))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_131 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 170, in test_131
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 131))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_132 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 175, in test_132
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 132))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_133 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 180, in test_133
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 133))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_134 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 185, in test_134
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 134))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_135 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 192, in test_135
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 135))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_136 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 197, in test_136
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 136))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_137 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 202, in test_137
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 137))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_138 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 207, in test_138
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 138))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_139 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 212, in test_139
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 139))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_140 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 217, in test_140
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 140))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_141 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 222, in test_141
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 141))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_142 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 229, in test_142
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 142))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_143 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 236, in test_143
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 143))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_144 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 241, in test_144
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 144))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_145 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 246, in test_145
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 145))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_146 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 251, in test_146
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 146))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_148 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 263, in test_148
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 148))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_149 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 268, in test_149
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 149))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_150 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 278, in test_150
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 150))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_151 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 283, in test_151
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 151))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_152 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 288, in test_152
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 152))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_153 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 293, in test_153
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 153))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_154 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 300, in test_154
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 154))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_155 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 305, in test_155
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 155))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_156 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 315, in test_156
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 156))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_157 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 320, in test_157
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 157))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_158 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 325, in test_158
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 158))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_159 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 330, in test_159
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 159))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_160 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 337, in test_160
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 160))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_161 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 342, in test_161
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 161))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_162 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 351, in test_162
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 162))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_163 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 356, in test_163
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 163))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_164 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 361, in test_164
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 164))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_165 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 366, in test_165
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 165))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_166 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 371, in test_166
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 166))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_167 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 389, in test_167
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 167))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_168 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 394, in test_168
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 168))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_169 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 399, in test_169
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 169))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_170 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 404, in test_170
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 170))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_171 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 409, in test_171
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 171))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_172 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 414, in test_172
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 172))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_173 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 419, in test_173
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 173))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_174 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 424, in test_174
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 174))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_175 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 429, in test_175
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 175))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_176 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 442, in test_176
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 176))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_177 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 447, in test_177
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 177))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_178 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 452, in test_178
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 178))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_179 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 457, in test_179
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 179))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_180 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 462, in test_180
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 180))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_181 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 469, in test_181
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 181))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_182 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 474, in test_182
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 182))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_183 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 479, in test_183
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 183))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_197 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 557, in test_197
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 197))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_198 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 562, in test_198
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 198))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_199 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 569, in test_199
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 199))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_200 (LexerSuite.LexerSuite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "./test/LexerSuite.py", line 598, in test_200
+    self.assertTrue(TestLexer.checkLexeme(input, expect, 200))
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 100 tests in 0.103s
+
+FAILED (failures=79, errors=2)
+
