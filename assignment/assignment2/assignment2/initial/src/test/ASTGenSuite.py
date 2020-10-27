@@ -2,7 +2,10 @@ import unittest
 from TestUtils import TestAST
 from AST import *
 
+
 class ASTGenSuite(unittest.TestCase):
+    """ Program structure """
+
     def test_301(self):
         input = r""" """
         expect = Program([])
@@ -29,6 +32,9 @@ Function: main
             FuncDecl(Id("main"), [], ([], []))
         ])
         self.assertTrue(TestAST.checkASTGen(input, expect, 302))
+
+    """ Variable declaration """
+
     def test_303(self):
         input = r"""
 Var: a;
@@ -189,6 +195,7 @@ Function: main
             ], ([], []))
         ])
         self.assertTrue(TestAST.checkASTGen(input, expect, 314))
+
     def test_315(self):
         input = r"""
 Function: main
@@ -205,6 +212,9 @@ Function: main
             ], ([], []))
         ])
         self.assertTrue(TestAST.checkASTGen(input, expect, 315))
+
+    """ If statement """
+
     def test_316(self):
         input = r"""
 Function: main
@@ -216,6 +226,7 @@ Function: main
         expect = Program(
             [FuncDecl(Id("main"), [], ([], [If([(BooleanLiteral(True), [], [])], ([], []))]))])
         self.assertTrue(TestAST.checkASTGen(input, expect, 316))
+
     def test_317(self):
         input = r"""
 Function: main
@@ -230,3 +241,446 @@ Function: main
                      ([], [If([(Id("a"), [VarDecl(Id("a"), [], None)], [])], ([], []))]))
         ])
         self.assertTrue(TestAST.checkASTGen(input, expect, 317))
+
+    def test_318(self):
+        input = r"""
+Function: main
+    Body:
+        If a Then
+            foo();
+        EndIf.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [],
+                     ([], [If([(Id("a"), [], [CallStmt(Id("foo"), [])])], ([], []))]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 318))
+
+    def test_319(self):
+        input = r"""
+Function: main
+    Body:
+        If a Then
+            Var: a, b;
+            foo1();
+            foo2();
+        EndIf.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [], ([], [
+                If([(Id("a"), [VarDecl(Id("a"), [], None),
+                               VarDecl(Id("b"), [], None)],
+                     [CallStmt(Id("foo1"), []), CallStmt(Id("foo2"), [])])], ([], []))
+            ]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 319))
+
+    def test_320(self):
+        input = r"""
+Function: main
+    Body:
+        If True Then
+        ElseIf True Then
+        EndIf.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [], ([], [
+                If([(BooleanLiteral(True), [], []),
+                    (BooleanLiteral(True), [], [])], ([], []))
+            ]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 320))
+
+    def test_321(self):
+        input = r"""
+Function: main
+    Body:
+        If True Then
+        ElseIf True Then
+        ElseIf True Then
+        EndIf.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [], ([], [
+                If([(BooleanLiteral(True), [], []), (BooleanLiteral(True), [], []),
+                    (BooleanLiteral(True), [], [])], ([], []))
+            ]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 321))
+
+    def test_322(self):
+        input = r"""
+Function: main
+    Body:
+        If True Then
+        ElseIf True Then
+        ElseIf True Then
+        ElseIf True Then
+        ElseIf True Then
+        ElseIf True Then
+        EndIf.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [], ([], [
+                If([(BooleanLiteral(True), [], []), (BooleanLiteral(True), [], []),
+                    (BooleanLiteral(True), [], []), (BooleanLiteral(True), [], []),
+                    (BooleanLiteral(True), [], []), (BooleanLiteral(True), [], [])], ([], []))
+            ]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 322))
+
+    def test_323(self):
+        input = r"""
+Function: main
+    Body:
+        If True Then
+        ElseIf True Then
+            Var: a;
+        EndIf.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [], ([], [
+                If([(BooleanLiteral(True), [], []),
+                    (BooleanLiteral(True), [VarDecl(Id("a"), [], None)], [])], ([], []))
+            ]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 323))
+
+    def test_324(self):
+        input = r"""
+Function: main
+    Body:
+        If True Then
+        ElseIf True Then
+            foo();
+        EndIf.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [], ([], [
+                If([(BooleanLiteral(True), [], []),
+                    (BooleanLiteral(True), [], [CallStmt(Id("foo"), [])])], ([], []))
+            ]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 324))
+
+    def test_325(self):
+        input = r"""
+Function: main
+    Body:
+        If True Then
+        ElseIf True Then
+            Var: a, b;
+            foo1();
+            foo2();
+        EndIf.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [], ([], [
+                If([(BooleanLiteral(True), [], []),
+                    (BooleanLiteral(True), [VarDecl(Id("a"), [], None),
+                                            VarDecl(Id("b"), [], None)],
+                     [CallStmt(Id("foo1"), []), CallStmt(Id("foo2"), [])])], ([], []))
+            ]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 325))
+
+    def test_326(self):
+        input = r"""
+Function: main
+    Body:
+        If True Then
+        ElseIf True Then
+        Else
+        EndIf.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [], ([], [
+                If([(BooleanLiteral(True), [], []),
+                    (BooleanLiteral(True), [], [])], ([], []))
+            ]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 326))
+
+    def test_327(self):
+        input = r"""
+Function: main
+    Body:
+        If True Then
+        Else
+        EndIf.
+    EndBody.
+"""
+        expect = Program(
+            [FuncDecl(Id("main"), [], ([], [If([(BooleanLiteral(True), [], [])], ([], []))]))])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 327))
+
+    def test_328(self):
+        input = r"""
+Function: main
+    Body:
+        If True Then
+        Else
+            Var: a;
+        EndIf.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(
+                Id("main"), [],
+                ([], [If([(BooleanLiteral(True), [], [])], ([VarDecl(Id("a"), [], None)], []))]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 328))
+
+    def test_329(self):
+        input = r"""
+Function: main
+    Body:
+        If True Then
+        Else
+            foo();
+        EndIf.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [],
+                     ([], [If([(BooleanLiteral(True), [], [])], ([], [CallStmt(Id("foo"), [])]))]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 329))
+
+    def test_330(self):
+        input = r"""
+Function: main
+    Body:
+        If True Then
+        Else
+            Var: a, b;
+            foo1();
+            foo2();
+        EndIf.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [], ([], [
+                If([(BooleanLiteral(True), [], [])],
+                   ([VarDecl(Id("a"), [], None),
+                     VarDecl(Id("b"), [], None)],
+                    [CallStmt(Id("foo1"), []), CallStmt(Id("foo2"), [])]))
+            ]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 330))
+
+    """ While """
+
+    def test_331(self):
+        input = r"""
+Function: main
+    Body:
+        While True Do
+        EndWhile.
+    EndBody.
+"""
+        expect = Program(
+            [FuncDecl(Id("main"), [], ([], [While(BooleanLiteral(True), ([], []))]))])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 331))
+
+    def test_332(self):
+        input = r"""
+Function: main
+    Body:
+        While True Do
+            Var: a;
+        EndWhile.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [],
+                     ([], [While(BooleanLiteral(True), ([VarDecl(Id("a"), [], None)], []))]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 332))
+
+    def test_333(self):
+        input = r"""
+Function: main
+    Body:
+        While True Do
+            foo();
+        EndWhile.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [],
+                     ([], [While(BooleanLiteral(True), ([], [CallStmt(Id("foo"), [])]))]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 333))
+
+    def test_334(self):
+        input = r"""
+Function: main
+    Body:
+        While True Do
+            Var: a, b;
+            foo1();
+            foo2();
+        EndWhile.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [], ([], [
+                While(
+                    BooleanLiteral(True),
+                    ([VarDecl(Id("a"), [], None),
+                      VarDecl(Id("b"), [], None)],
+                     [CallStmt(Id("foo1"), []), CallStmt(Id("foo2"), [])]))
+            ]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 334))
+
+    """ Do while """
+
+    def test_335(self):
+        input = r"""
+Function: main
+    Body:
+        Do
+        While True
+        EndDo.
+    EndBody.
+"""
+        expect = Program(
+            [FuncDecl(Id("main"), [], ([], [Dowhile(([], []), BooleanLiteral(True))]))])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 335))
+
+    def test_336(self):
+        input = r"""
+Function: main
+    Body:
+        Do
+            Var: a;
+        While True
+        EndDo.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [],
+                     ([], [Dowhile(([VarDecl(Id("a"), [], None)], []), BooleanLiteral(True))]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 336))
+
+    def test_337(self):
+        input = r"""
+Function: main
+    Body:
+        Do
+            foo();
+        While True
+        EndDo.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [],
+                     ([], [Dowhile(([], [CallStmt(Id("foo"), [])]), BooleanLiteral(True))]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 337))
+
+    def test_338(self):
+        input = r"""
+Function: main
+    Body:
+        Do
+            Var: a, b;
+            foo1();
+            foo2();
+        While True
+        EndDo.
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [], ([], [
+                Dowhile(
+                    ([VarDecl(Id("a"), [], None),
+                      VarDecl(Id("b"), [], None)],
+                     [CallStmt(Id("foo1"), []), CallStmt(Id("foo2"), [])]), BooleanLiteral(True))
+            ]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 338))
+
+    """ Break """
+
+    def test_339(self):
+        input = r"""
+Function: main
+    Body:
+        Break;
+    EndBody.
+"""
+        expect = Program([FuncDecl(Id("main"), [], ([], [Break()]))])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 339))
+
+    def test_340(self):
+        input = r"""
+Function: main
+    Body:
+        Continue;
+    EndBody.
+"""
+        expect = Program([FuncDecl(Id("main"), [], ([], [Continue()]))])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 340))
+
+    def test_341(self):
+        input = r"""
+Function: main
+    Body:
+        Return 1;
+    EndBody.
+"""
+        expect = Program(
+            [FuncDecl(Id("main"), [], ([], [Return(IntLiteral(1))]))])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 341))
+
+    def test_342(self):
+        input = r"""
+Function: main
+    Body:
+        Return;
+    EndBody.
+"""
+        expect = Program([FuncDecl(Id("main"), [], ([], [Return(None)]))])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 342))
+
+    """ Funccall """
+
+    def test_343(self):
+        input = r"""
+Function: main
+    Body:
+        foo(a);
+    EndBody.
+"""
+        expect = Program(
+            [FuncDecl(Id("main"), [], ([], [CallStmt(Id("foo"), [Id("a")])]))])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 343))
+
+    def test_344(self):
+        input = r"""
+Function: main
+    Body:
+        foo(a[2]);
+    EndBody.
+"""
+        expect = Program([
+            FuncDecl(Id("main"), [], ([], [
+                CallStmt(Id("foo"), [
+                    ArrayCell(Id("a"), [IntLiteral(2)])
+                ])
+            ]))
+        ])
+        self.assertTrue(TestAST.checkASTGen(input, expect, 344))

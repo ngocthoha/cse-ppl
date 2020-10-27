@@ -1,0 +1,1 @@
+Program([FuncDecl(Id(main)[],([][Assign(Id(a),IntLiteral(1)),Assign(Id(a),FloatLiteral(1.0)),Assign(Id(a),BooleanLiteral(true)),Assign(Id(a),BooleanLiteral(false)),Assign(Id(a),StringLiteral(Hello World \n))])])

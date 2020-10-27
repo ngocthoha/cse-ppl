@@ -3,173 +3,179 @@ from BKITParser import BKITParser
 from AST import *
 from functools import reduce
 
-def stoi(x):
-    if '0o' in x or '0O' in x: return int(x, 8)
-    elif '0x' in x or '0X' in x: return int(x, 16)
-    else: return int(x)
+
+def stoi(num: str):
+    return (
+        int(num, 8) if '0o' in num or '0O' in num else
+        int(num, 16) if '0x' in num or '0X' in num else
+        int(num)
+    )
+
 
 class ASTGeneration(BKITVisitor):
     # //===== PARSER STRUCTURE =====//
     #program  :variableStatement* funcDeclaration* EOF;
-    def visitProgram(self, ctx:BKITParser.ProgramContext):
-        VarDecl = reduce(lambda x, y: x + self.visit(y), ctx.variableStatement(), [])
-        FunDecl = list(map(lambda x: self.visit(x), ctx.funcDeclaration()))
-        return Program( VarDecl + FunDecl)
+    def visitProgram(self, ctx: BKITParser.ProgramContext):
+        varDecls = sum([self.visit(var)
+                        for var in ctx.variableStatement()], [])
+        funcDecls = list(map(lambda x: self.visit(x), ctx.funcDeclaration()))
+        return Program(varDecls + funcDecls)
 
     # variableStatement: VAR COLON varList SEMI;
-    def visitVariableStatement(self, ctx:BKITParser.VariableStatementContext):
+    def visitVariableStatement(self, ctx: BKITParser.VariableStatementContext):
         return self.visit(ctx.varList())
 
     # varList: varDeclaration (COMMA varDeclaration)*;
-    def visitVarList(self, ctx:BKITParser.VarListContext):
+    def visitVarList(self, ctx: BKITParser.VarListContext):
         return [self.visit(x) for x in ctx.varDeclaration()]
 
     # varDeclaration: Identifier (LSB IntegerConstant RSB)* (ASSIGN literals)?;
-    def visitVarDeclaration(self, ctx:BKITParser.VarDeclarationContext):
+    def visitVarDeclaration(self, ctx: BKITParser.VarDeclarationContext):
         return VarDecl(
             Id(ctx.Identifier().getText()),
-            [stoi(x.getText()) for x in ctx.IntegerConstant()] if ctx.IntegerConstant() else [],
+            [stoi(x.getText()) for x in ctx.IntegerConstant()
+             ] if ctx.IntegerConstant() else [],
             self.visit(ctx.literals()) if ctx.ASSIGN() else None
         )
     # funcDeclaration: FUNCTION COLON Identifier (PARAMETER COLON paraList)? funcBody;
-    def visitFuncDeclaration(self, ctx:BKITParser.FuncDeclarationContext):
+
+    def visitFuncDeclaration(self, ctx: BKITParser.FuncDeclarationContext):
         return FuncDecl(
             Id(ctx.Identifier().getText()),
             self.visit(ctx.paraList()) if ctx.paraList() else [],
             self.visit(ctx.funcBody())
         )
     # paraList: parameters (COMMA parameters)*;
-    def visitParaList(self, ctx:BKITParser.ParaListContext):
-        return reduce(lambda x, y: x + self.visit(y), ctx.parameters(), [])
-    
+
+    def visitParaList(self, ctx: BKITParser.ParaListContext):
+        return sum([self.visit(param) for param in ctx.parameters()], [])
+
     # parameters: Identifier (LSB IntegerConstant RSB)*;
-    def visitParameters(self, ctx:BKITParser.ParametersContext):
+    def visitParameters(self, ctx: BKITParser.ParametersContext):
         return [VarDecl(
             Id(ctx.Identifier().getText()),
-            [stoi(x.getText()) for x in ctx.IntegerConstant()] if ctx.IntegerConstant() else [],
+            [stoi(x.getText()) for x in ctx.IntegerConstant()
+             ] if ctx.IntegerConstant() else [],
             None
         )]
 
-
     # funcBody: BODY COLON statementList ENDBODY DOT;
-    def visitFuncBody(self, ctx:BKITParser.FuncBodyContext):
+    def visitFuncBody(self, ctx: BKITParser.FuncBodyContext):
         return self.visit(ctx.statementList())
     # //===== STATEMENTS =====//
     # variableStatement* statement*
-    def visitStatementList(self, ctx:BKITParser.StatementListContext):
-        VarList = reduce(lambda x, y: x + self.visit(y), ctx.variableStatement(), [])
-        StaList = reduce(lambda x, y: x + self.visit(y), ctx.statement(), [])
-        return (VarList, StaList)
 
-    # Visit a parse tree produced by BKITParser#statement.
-    def visitStatement(self, ctx:BKITParser.StatementContext):
+    def visitStatementList(self, ctx: BKITParser.StatementListContext):
+        varList = sum([self.visit(var) for var in ctx.variableStatement()], [])
+        staList = [self.visit(sta) for sta in ctx.statement()]
+        return (varList, staList)
+
+    # statement.
+    def visitStatement(self, ctx: BKITParser.StatementContext):
         return self.visitChildren(ctx)
 
+    # assignDeclaration ASSIGN expression SEMI;
+    def visitAssignmentStatement(self, ctx: BKITParser.AssignmentStatementContext):
+        lhs = self.visit(ctx.assignDeclaration())
+        rhs = self.visit(ctx.expression())
+        return Assign(lhs, rhs)
 
-    # Visit a parse tree produced by BKITParser#assignmentStatement.
-    def visitAssignmentStatement(self, ctx:BKITParser.AssignmentStatementContext):
+    # (Identifier | functionCall) indexOperator*;
+    def visitAssignDeclaration(self, ctx: BKITParser.AssignDeclarationContext):
+        return (
+            Id(ctx.Identifier().getText()) if not ctx.indexOperator() else
+            ArrayCell(Id(ctx.Identifier().getText()), [])
+        )
+
+    # IF expression THEN statementList elseIfStatement* (ELSE statementList)? ENDIF DOT
+    def visitIfStatement(self, ctx: BKITParser.IfStatementContext):
+        ifExpr = self.visit(ctx.expression())
+        elsestmt = self.visit(ctx.statementList(1)) if ctx.ELSE() else ([], [])
+        varlist, stalist = self.visit(ctx.statementList(0))
+        ifstmt = (ifExpr, varlist, stalist)
+        elseifstmt = [self.visit(x) for x in ctx.elseIfStatement()]
+        ifthen = [ifstmt] + elseifstmt
+        return If(ifthen, elsestmt)
+
+    # elseIfStatement
+    def visitElseIfStatement(self, ctx: BKITParser.ElseIfStatementContext):
+        ifExpr = self.visit(ctx.expression())
+        varlist, stalist = self.visit(ctx.statementList())
+        return (ifExpr, varlist, stalist)
+
+    # iterationStatement.
+    def visitIterationStatement(self, ctx: BKITParser.IterationStatementContext):
         return self.visitChildren(ctx)
 
-
-    # Visit a parse tree produced by BKITParser#assignDeclaration.
-    def visitAssignDeclaration(self, ctx:BKITParser.AssignDeclarationContext):
+    # FOR LB forCondition RB DO statementList ENDFOR DOT
+    def visitForStatement(self, ctx: BKITParser.ForStatementContext):
         return self.visitChildren(ctx)
 
-
-    # IF expression THEN statementList (ELSEIF expression THEN statementList)* (ELSE statementList)? ENDIF DOT
-    def visitIfStatement(self, ctx:BKITParser.IfStatementContext):
-        return [If(
-            [
-                (
-                    self.visit(ctx.expression(0)),
-                    [self.visitVariableStatement(ctx.v)],
-                    []
-                )
-            ],
-            (
-                [],
-                []
-            )
-        )]
-
-
-    # Visit a parse tree produced by BKITParser#iterationStatement.
-    def visitIterationStatement(self, ctx:BKITParser.IterationStatementContext):
+    # forDeclaration COMMA conditionExpr? COMMA updateExpr?
+    def visitForCondition(self, ctx: BKITParser.ForConditionContext):
         return self.visitChildren(ctx)
 
-
-    # Visit a parse tree produced by BKITParser#forStatement.
-    def visitForStatement(self, ctx:BKITParser.ForStatementContext):
+    # Identifier ASSIGN expression;
+    def visitForDeclaration(self, ctx: BKITParser.ForDeclarationContext):
         return self.visitChildren(ctx)
 
-
-    # Visit a parse tree produced by BKITParser#forCondition.
-    def visitForCondition(self, ctx:BKITParser.ForConditionContext):
+    # conditionExpr.
+    def visitConditionExpr(self, ctx: BKITParser.ConditionExprContext):
         return self.visitChildren(ctx)
 
-
-    # Visit a parse tree produced by BKITParser#forDeclaration.
-    def visitForDeclaration(self, ctx:BKITParser.ForDeclarationContext):
+    # updateExpr.
+    def visitUpdateExpr(self, ctx: BKITParser.UpdateExprContext):
         return self.visitChildren(ctx)
 
+    # WHILE expression DO statementList ENDWHILE DOT
+    def visitWhileStatement(self, ctx: BKITParser.WhileStatementContext):
+        expr = self.visit(ctx.expression())
+        staList = self.visit(ctx.statementList())
+        return While(expr, staList)
 
-    # Visit a parse tree produced by BKITParser#conditionExpr.
-    def visitConditionExpr(self, ctx:BKITParser.ConditionExprContext):
+    # DO statementList WHILE expression ENDDO DOT
+    def visitDoWhileStatement(self, ctx: BKITParser.DoWhileStatementContext):
+        staList = self.visit(ctx.statementList())
+        expr = self.visit(ctx.expression())
+        return Dowhile(staList, expr)
+
+    # jumpStatement.
+    def visitJumpStatement(self, ctx: BKITParser.JumpStatementContext):
         return self.visitChildren(ctx)
 
-
-    # Visit a parse tree produced by BKITParser#updateExpr.
-    def visitUpdateExpr(self, ctx:BKITParser.UpdateExprContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by BKITParser#whileStatement.
-    def visitWhileStatement(self, ctx:BKITParser.WhileStatementContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by BKITParser#doWhileStatement.
-    def visitDoWhileStatement(self, ctx:BKITParser.DoWhileStatementContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by BKITParser#jumpStatement.
-    def visitJumpStatement(self, ctx:BKITParser.JumpStatementContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by BKITParser#breakStatement.
-    def visitBreakStatement(self, ctx:BKITParser.BreakStatementContext):
-        return self.visitChildren(ctx)
-
+    # breakStatement.
+    def visitBreakStatement(self, ctx: BKITParser.BreakStatementContext):
+        return Break()
 
     # Visit a parse tree produced by BKITParser#continueStatement.
-    def visitContinueStatement(self, ctx:BKITParser.ContinueStatementContext):
-        return self.visitChildren(ctx)
-
+    def visitContinueStatement(self, ctx: BKITParser.ContinueStatementContext):
+        return Continue()
 
     # functionCall SEMI
-    def visitCallStatement(self, ctx:BKITParser.CallStatementContext):
+    def visitCallStatement(self, ctx: BKITParser.CallStatementContext):
         return self.visit(ctx.functionCall())
 
     # Identifier LB argumentList? RB
-    def visitFunctionCall(self, ctx:BKITParser.FunctionCallContext):
-        return [CallStmt(
+    def visitFunctionCall(self, ctx: BKITParser.FunctionCallContext):
+        return CallStmt(
             Id(ctx.Identifier().getText()),
-            [] if ctx.argumentList() else []
-        )]
+            self.visit(ctx.argumentList()) if ctx.argumentList() else []
+        )
 
     # argumentList COMMA expression | expression
-    def visitArgumentList(self, ctx:BKITParser.ArgumentListContext):
-        return self.visitChildren(ctx)
+    def visitArgumentList(self, ctx: BKITParser.ArgumentListContext):
+        return (
+            [self.visit(ctx.expression())] if not ctx.COMMA() else
+            self.visit(ctx.argumentList()) + [self.visit(ctx.expression())]
+        )
 
-    # Visit a parse tree produced by BKITParser#returnStatement.
-    def visitReturnStatement(self, ctx:BKITParser.ReturnStatementContext):
-        return self.visitChildren(ctx)
+    # RETURN expression? SEMI
+    def visitReturnStatement(self, ctx: BKITParser.ReturnStatementContext):
+        return Return(self.visit(ctx.expression())) if ctx.expression() else Return(None)
 
     # //===== EXPRESSIONS =====//
-    # logicalOrAndExpression relationalOperator logicalOrAndExpression | logicalOrAndExpression 
-    def visitExpression(self, ctx:BKITParser.ExpressionContext):
+    # logicalOrAndExpression relationalOperator logicalOrAndExpression | logicalOrAndExpression
+    def visitExpression(self, ctx: BKITParser.ExpressionContext):
         if ctx.relationalOperator():
             op = self.visit(ctx.relationalOperator())
             left = self.visit(ctx.logicalOrAndExpression(0))
@@ -179,43 +185,39 @@ class ASTGeneration(BKITVisitor):
             return self.visit(ctx.logicalOrAndExpression(0))
 
     # Visit a parse tree produced by BKITParser#relationalOperator.
-    def visitRelationalOperator(self, ctx:BKITParser.RelationalOperatorContext):
-        return self.visitChildren(ctx)
-
+    def visitRelationalOperator(self, ctx: BKITParser.RelationalOperatorContext):
+        return ctx.getChild(0).getText()
 
     # logicalOrAndExpression logicalOrAndOperator additiveExpression | additiveExpression
-    def visitLogicalOrAndExpression(self, ctx:BKITParser.LogicalOrAndExpressionContext):
+    def visitLogicalOrAndExpression(self, ctx: BKITParser.LogicalOrAndExpressionContext):
         if ctx.logicalOrAndOperator():
             op = self.visit(ctx.logicalOrAndOperator())
             left = self.visit(ctx.logicalOrAndExpression())
-            right = self.visit(ctx.additiveExpression(0))
+            right = self.visit(ctx.additiveExpression())
             return BinaryOp(op, left, right)
         else:
             return self.visit(ctx.additiveExpression())
 
-
     # logicalOrAndOperator.
-    def visitLogicalOrAndOperator(self, ctx:BKITParser.LogicalOrAndOperatorContext):
-        return self.visitChildren(ctx)
-
+    def visitLogicalOrAndOperator(self, ctx: BKITParser.LogicalOrAndOperatorContext):
+        return ctx.getChild(0).getText()
 
     # additiveExpression additiveOperator multiplicativeExpression | multiplicativeExpression
-    def visitAdditiveExpression(self, ctx:BKITParser.AdditiveExpressionContext):
+    def visitAdditiveExpression(self, ctx: BKITParser.AdditiveExpressionContext):
         if ctx.additiveOperator():
             op = self.visit(ctx.additiveOperator())
             left = self.visit(ctx.additiveExpression())
-            right = self.visit(ctx.multiplicativeExpression(0))
+            right = self.visit(ctx.multiplicativeExpression())
             return BinaryOp(op, left, right)
         else:
             return self.visit(ctx.multiplicativeExpression())
 
-    # Visit a parse tree produced by BKITParser#additiveOperator.
-    def visitAdditiveOperator(self, ctx:BKITParser.AdditiveOperatorContext):
-        return self.visitChildren(ctx)
-
+    # additiveOperator.
+    def visitAdditiveOperator(self, ctx: BKITParser.AdditiveOperatorContext):
+        return ctx.getChild(0).getText()
 
     # multiplicativeExpression multiplicativeOperator logicalNotExpression | logicalNotExpression
-    def visitMultiplicativeExpression(self, ctx:BKITParser.MultiplicativeExpressionContext):
+    def visitMultiplicativeExpression(self, ctx: BKITParser.MultiplicativeExpressionContext):
         if ctx.multiplicativeOperator():
             op = self.visit(ctx.multiplicativeOperator())
             left = self.visit(ctx.multiplicativeExpression())
@@ -223,84 +225,74 @@ class ASTGeneration(BKITVisitor):
             return BinaryOp(op, left, right)
         else:
             return self.visit(ctx.logicalNotExpression())
-        
 
     # multiplicativeOperator.
-    def visitMultiplicativeOperator(self, ctx:BKITParser.MultiplicativeOperatorContext):
-        return self.visitChildren(ctx)
-
+    def visitMultiplicativeOperator(self, ctx: BKITParser.MultiplicativeOperatorContext):
+        return ctx.getChild(0).getText()
 
     # NOT logicalNotExpression | signExpression
-    def visitLogicalNotExpression(self, ctx:BKITParser.LogicalNotExpressionContext):
+    def visitLogicalNotExpression(self, ctx: BKITParser.LogicalNotExpressionContext):
         if ctx.NOT():
-            return UnaryOp(self.visit(ctx.NOT()), self.visit(ctx.logicalNotExpression()))
+            return UnaryOp(ctx.NOT().getText(), self.visit(ctx.logicalNotExpression()))
         else:
             return self.visit(ctx.signExpression())
 
     # signOperator signExpression | indexExpression
-    def visitSignExpression(self, ctx:BKITParser.SignExpressionContext):
-        if ctx.signOperator():
-            return UnaryOp(self.visit(ctx.signOperator(), self.visit(ctx.signExpression())))
-        else:
-            return self.visit(ctx.indexExpression())
+    def visitSignExpression(self, ctx: BKITParser.SignExpressionContext):
+        return (
+            UnaryOp(self.visit(ctx.signOperator()), self.visit(ctx.signExpression())) if ctx.signOperator() else
+            self.visit(ctx.indexExpression())
+        )
 
     # SUB | SUBF
-    def visitSignOperator(self, ctx:BKITParser.SignOperatorContext):
-        return self.visitChildren(ctx)
-
+    def visitSignOperator(self, ctx: BKITParser.SignOperatorContext):
+        return ctx.getChild(0).getText()
 
     # indexExpression indexOperator | funcExpression
-    def visitIndexExpression(self, ctx:BKITParser.IndexExpressionContext):
-        if ctx.indexOperator():
-            return UnaryOp(self.visit(ctx.indexOperator()), self.visit(ctx.indexExpression))
-        else:
-            return self.visit(ctx.funcExpression())
-
+    def visitIndexExpression(self, ctx: BKITParser.IndexExpressionContext):
+        return (
+            UnaryOp(self.visit(ctx.indexOperator()), self.visit(ctx.indexExpression)) if ctx.indexOperator() else
+            self.visit(ctx.funcExpression())
+        )
 
     # LSB expression RSB
-    def visitIndexOperator(self, ctx:BKITParser.IndexOperatorContext):
+    def visitIndexOperator(self, ctx: BKITParser.IndexOperatorContext):
         return self.visit(ctx.expression())
-
-
     # primaryExpression LSB expression RSB | primaryExpression
-    def visitFuncExpression(self, ctx:BKITParser.FuncExpressionContext):
-        if ctx.expression():
-            return UnaryOp(self.visit(ctx.expression()), self.visit(ctx.primaryExpression(0)))
-        else:
-            return self.visit(ctx.primaryExpression())
 
+    def visitFuncExpression(self, ctx: BKITParser.FuncExpressionContext):
+        return (
+            ArrayCell(self.visit(ctx.primaryExpression()), [self.visit(ctx.expression())]) if ctx.expression() else
+            self.visit(ctx.primaryExpression())
+        )
 
-    #primaryExpression.
-    def visitPrimaryExpression(self, ctx:BKITParser.PrimaryExpressionContext):
-        if ctx.expression(): return self.visit(ctx.expression())
-        elif ctx.Identifier(): return Id(ctx.Identifier().getText())
-        elif ctx.literals(): return self.visit(ctx.literals())
-        else: return self.visit(ctx.functionCall())
+    # primaryExpression.
+    def visitPrimaryExpression(self, ctx: BKITParser.PrimaryExpressionContext):
+        return (
+            self.visit(ctx.expression()) if ctx.expression() else
+            Id(ctx.Identifier().getText()) if ctx.Identifier() else
+            self.visit(ctx.literals()) if ctx.literals() else
+            self.visit(ctx.functionCall())
+        )
 
-    
     # Visit a parse tree produced by BKITParser#literals.
-    def visitLiterals(self, ctx:BKITParser.LiteralsContext):
-        if ctx.IntegerConstant():
-            return IntLiteral(stoi(ctx.IntegerConstant().getText())) 
-        elif ctx.FloatingConstant():
-            return FloatLiteral(float(ctx.FloatingConstant().getText()))
-        elif ctx.String():
-            return StringLiteral(ctx.String().getText())
-        elif ctx.boolean():
-            return self.visitBoolean(ctx)
-        else:
-            return self.visit(ctx.array())
+    def visitLiterals(self, ctx: BKITParser.LiteralsContext):
+        return (
+            IntLiteral(stoi(ctx.IntegerConstant().getText())) if ctx.IntegerConstant() else
+            FloatLiteral(float(ctx.FloatingConstant().getText())) if ctx.FloatingConstant() else
+            StringLiteral(ctx.String().getText()) if ctx.String() else
+            self.visitBoolean(ctx) if ctx.boolean() else
+            self.visit(ctx.array())
+        )
 
-    # Visit a parse tree produced by BKITParser#boolean.
-    def visitBoolean(self, ctx:BKITParser.BooleanContext):
+    # boolean.
+    def visitBoolean(self, ctx: BKITParser.BooleanContext):
         return BooleanLiteral(True if ctx.boolean().getText() == "True" else False)
 
     # LP literals (COMMA literals)* RP
-    def visitArray(self, ctx:BKITParser.ArrayContext):
+    def visitArray(self, ctx: BKITParser.ArrayContext):
         return ArrayLiteral([self.visit(x) for x in ctx.literals()])
 
     # Visit a parse tree produced by BKITParser#assignmentOperator.
-    def visitAssignmentOperator(self, ctx:BKITParser.AssignmentOperatorContext):
+    def visitAssignmentOperator(self, ctx: BKITParser.AssignmentOperatorContext):
         return self.visitChildren(ctx)
-
-    

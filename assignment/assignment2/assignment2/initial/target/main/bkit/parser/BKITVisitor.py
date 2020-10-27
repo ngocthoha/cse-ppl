@@ -74,6 +74,11 @@ class BKITVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by BKITParser#elseIfStatement.
+    def visitElseIfStatement(self, ctx:BKITParser.ElseIfStatementContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by BKITParser#iterationStatement.
     def visitIterationStatement(self, ctx:BKITParser.IterationStatementContext):
         return self.visitChildren(ctx)

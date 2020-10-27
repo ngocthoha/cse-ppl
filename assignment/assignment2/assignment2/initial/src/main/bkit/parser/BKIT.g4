@@ -53,8 +53,11 @@ assignmentStatement: assignDeclaration ASSIGN expression SEMI;
 assignDeclaration: (Identifier | functionCall) indexOperator*;
 //If Statement
 ifStatement
-    :IF expression THEN statementList (ELSEIF expression THEN statementList)* (ELSE statementList)?
+    :IF expression THEN statementList elseIfStatement* (ELSE statementList)?
      ENDIF DOT
+    ;
+elseIfStatement
+    :ELSEIF expression THEN statementList
     ;
 //IterationStatement
 iterationStatement
