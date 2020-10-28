@@ -36,87 +36,6 @@ funcDeclaration: FUNCTION COLON Identifier (PARAMETER COLON paraList)? funcBody;
 paraList: parameters (COMMA parameters)*;
 parameters: Identifier (LSB IntegerConstant RSB)*;
 funcBody: BODY COLON statementList ENDBODY DOT;
-
-//===== EXPRESSIONS =====//
-expression
-    :logicalOrAndExpression relationalOperator logicalOrAndExpression
-    |logicalOrAndExpression
-    ;
-relationalOperator
-    :EQ | NE | NEF | LE | LEF | LT | LTF | GE | GEF | GT | GTF
-    ;
-logicalOrAndExpression
-    :logicalOrAndExpression logicalOrAndOperator additiveExpression
-    |additiveExpression
-    ;
-logicalOrAndOperator
-    :OR | AND
-    ;
-additiveExpression
-    :additiveExpression additiveOperator multiplicativeExpression
-    |multiplicativeExpression
-    ;
-additiveOperator
-    :SUB | SUBF | ADD | ADDF
-    ;
-multiplicativeExpression
-    :multiplicativeExpression multiplicativeOperator logicalNotExpression
-    |logicalNotExpression
-    ;
-multiplicativeOperator
-    :MUL | MULF | DIV | DIVF | MOD
-    ;
-logicalNotExpression
-    :NOT logicalNotExpression
-    |signExpression
-    ;
-signExpression
-    :signOperator signExpression
-    |indexExpression
-    ;
-signOperator
-    :SUB | SUBF
-    ;
-indexExpression
-    :indexExpression indexOperator
-    |funcExpression
-    ;
-indexOperator
-    :LSB expression RSB
-    ;
-funcExpression
-    :primaryExpression LSB expression RSB
-    |primaryExpression
-    ;
-primaryExpression
-    :Identifier
-    |literals
-    |functionCall
-    |LB expression RB
-    ;
-literals
-    :IntegerConstant
-    |FloatingConstant
-    |String
-    |boolean
-    |array
-    ;
-boolean
-    :TRUE | FALSE
-    ;
-array
-    :LP literals (COMMA literals)* RP
-    ;
-assignmentOperator
-    :ASSIGN
-    ;
-functionCall
-    :Identifier LB argumentList? RB
-    ;
-argumentList
-    :argumentList COMMA expression
-    |expression
-    ;
 //===== STATEMENTS =====//
 statementList
     :variableStatement* statement*
@@ -134,8 +53,11 @@ assignmentStatement: assignDeclaration ASSIGN expression SEMI;
 assignDeclaration: (Identifier | functionCall) indexOperator*;
 //If Statement
 ifStatement
-    :IF expression THEN statementList (ELSEIF expression THEN statementList)*? (ELSE statementList)?
+    :IF expression THEN statementList elseIfStatement* (ELSE statementList)?
      ENDIF DOT
+    ;
+elseIfStatement
+    :ELSEIF expression THEN statementList
     ;
 //IterationStatement
 iterationStatement
@@ -180,10 +102,90 @@ continueStatement
 callStatement
     :functionCall SEMI
     ;
+functionCall
+    :Identifier LB argumentList? RB
+    ;
+argumentList
+    :argumentList COMMA expression
+    |expression
+    ;
 //Return Statement
 returnStatement
     :RETURN expression? SEMI
     ;
+//===== EXPRESSIONS =====//
+expression
+    :logicalOrAndExpression relationalOperator logicalOrAndExpression
+    |logicalOrAndExpression
+    ;
+relationalOperator
+    :EQ | NE | NEF | LE | LEF | LT | LTF | GE | GEF | GT | GTF
+    ;
+logicalOrAndExpression
+    :logicalOrAndExpression logicalOrAndOperator additiveExpression
+    |additiveExpression
+    ;
+logicalOrAndOperator
+    :OR | AND
+    ;
+additiveExpression
+    :additiveExpression additiveOperator multiplicativeExpression
+    |multiplicativeExpression
+    ;
+additiveOperator
+    :SUB | SUBF | ADD | ADDF
+    ;
+multiplicativeExpression
+    :multiplicativeExpression multiplicativeOperator logicalNotExpression
+    |logicalNotExpression
+    ;
+multiplicativeOperator
+    :MUL | MULF | DIV | DIVF | MOD
+    ;
+logicalNotExpression
+    :NOT logicalNotExpression
+    |signExpression
+    ;
+signExpression
+    :signOperator signExpression
+    |indexExpression
+    ;
+signOperator
+    :SUB | SUBF
+    ;
+indexExpression
+    :indexExpression indexOperator+
+    |primaryExpression
+    ;
+indexOperator
+    :LSB expression RSB
+    ;
+primaryExpression
+    :Identifier
+    |literals
+    |callExpr
+    |LB expression RB
+    ;
+callExpr
+    :Identifier LB argumentList? RB
+    ;
+literals
+    :IntegerConstant
+    |FloatingConstant
+    |String
+    |boolean
+    |array
+    ;
+boolean
+    :TRUE | FALSE
+    ;
+array
+    :LP literals (COMMA literals)* RP
+    ;
+assignmentOperator
+    :ASSIGN
+    ;
+
 //===== LEXICAL STRUCTURE =====//
 //Identifier
 Identifier: Lowercase (Letters | UNDERSCORE | Digit)*;

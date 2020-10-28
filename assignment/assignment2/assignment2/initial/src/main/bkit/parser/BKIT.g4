@@ -154,21 +154,20 @@ signOperator
     :SUB | SUBF
     ;
 indexExpression
-    :indexExpression indexOperator
-    |funcExpression
+    :indexExpression indexOperator+
+    |primaryExpression
     ;
 indexOperator
     :LSB expression RSB
     ;
-funcExpression
-    :primaryExpression LSB expression RSB
-    |primaryExpression
-    ;
 primaryExpression
     :Identifier
     |literals
-    |functionCall
+    |callExpr
     |LB expression RB
+    ;
+callExpr
+    :Identifier LB argumentList? RB
     ;
 literals
     :IntegerConstant

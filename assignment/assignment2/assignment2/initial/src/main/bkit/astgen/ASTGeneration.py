@@ -4,23 +4,15 @@ from AST import *
 from functools import reduce
 
 
-def stoi(num: str):
-    return (
-        int(num, 8) if '0o' in num or '0O' in num else
-        int(num, 16) if '0x' in num or '0X' in num else
-        int(num)
-    )
-
-
 class ASTGeneration(BKITVisitor):
     # //===== PARSER STRUCTURE =====//
     #program  :variableStatement* funcDeclaration* EOF;
     def visitProgram(self, ctx: BKITParser.ProgramContext):
         varDecls = sum([self.visit(var)
                         for var in ctx.variableStatement()], [])
-        funcDecls = list(map(lambda x: self.visit(x), ctx.funcDeclaration()))
+        funcDecls = [self.visit(func) for func in ctx.funcDeclaration()]
         return Program(varDecls + funcDecls)
-
+        
     # variableStatement: VAR COLON varList SEMI;
     def visitVariableStatement(self, ctx: BKITParser.VariableStatementContext):
         return self.visit(ctx.varList())
@@ -31,10 +23,9 @@ class ASTGeneration(BKITVisitor):
 
     # varDeclaration: Identifier (LSB IntegerConstant RSB)* (ASSIGN literals)?;
     def visitVarDeclaration(self, ctx: BKITParser.VarDeclarationContext):
+        ids = [self.stoi(x.getText()) for x in ctx.IntegerConstant()]
         return VarDecl(
-            Id(ctx.Identifier().getText()),
-            [stoi(x.getText()) for x in ctx.IntegerConstant()
-             ] if ctx.IntegerConstant() else [],
+            Id(ctx.Identifier().getText()), ids,
             self.visit(ctx.literals()) if ctx.ASSIGN() else None
         )
     # funcDeclaration: FUNCTION COLON Identifier (PARAMETER COLON paraList)? funcBody;
@@ -45,19 +36,19 @@ class ASTGeneration(BKITVisitor):
             self.visit(ctx.paraList()) if ctx.paraList() else [],
             self.visit(ctx.funcBody())
         )
+        
     # paraList: parameters (COMMA parameters)*;
-
     def visitParaList(self, ctx: BKITParser.ParaListContext):
-        return sum([self.visit(param) for param in ctx.parameters()], [])
+        return [self.visit(param) for param in ctx.parameters()]
 
     # parameters: Identifier (LSB IntegerConstant RSB)*;
     def visitParameters(self, ctx: BKITParser.ParametersContext):
-        return [VarDecl(
+        return VarDecl(
             Id(ctx.Identifier().getText()),
-            [stoi(x.getText()) for x in ctx.IntegerConstant()
+            [self.stoi(x.getText()) for x in ctx.IntegerConstant()
              ] if ctx.IntegerConstant() else [],
             None
-        )]
+        )
 
     # funcBody: BODY COLON statementList ENDBODY DOT;
     def visitFuncBody(self, ctx: BKITParser.FuncBodyContext):
@@ -84,7 +75,10 @@ class ASTGeneration(BKITVisitor):
     def visitAssignDeclaration(self, ctx: BKITParser.AssignDeclarationContext):
         return (
             Id(ctx.Identifier().getText()) if not ctx.indexOperator() else
-            ArrayCell(Id(ctx.Identifier().getText()), [])
+            ArrayCell(
+                Id(ctx.Identifier().getText()),
+                [self.visit(x) for x in ctx.indexOperator()]
+            )
         )
 
     # IF expression THEN statementList elseIfStatement* (ELSE statementList)? ENDIF DOT
@@ -109,21 +103,32 @@ class ASTGeneration(BKITVisitor):
 
     # FOR LB forCondition RB DO statementList ENDFOR DOT
     def visitForStatement(self, ctx: BKITParser.ForStatementContext):
-        return self.visitChildren(ctx)
+        id1, expr1, expr2, expr3 = self.visit(ctx.forCondition())
+        listDecls = self.visit(ctx.statementList())
+        return For(id1, expr1, expr2, expr3, listDecls)
 
     # forDeclaration COMMA conditionExpr? COMMA updateExpr?
     def visitForCondition(self, ctx: BKITParser.ForConditionContext):
-        return self.visitChildren(ctx)
+        ids, expr = self.visit(ctx.forDeclaration())
+        return (
+            ids,
+            expr,
+            self.visit(ctx.conditionExpr()) if ctx.conditionExpr() else None,
+            self.visit(ctx.updateExpr()) if ctx.updateExpr() else None
+        )
 
     # Identifier ASSIGN expression;
     def visitForDeclaration(self, ctx: BKITParser.ForDeclarationContext):
-        return self.visitChildren(ctx)
+        return (
+            Id(ctx.Identifier().getText()),
+            self.visit(ctx.expression())
+        )
 
-    # conditionExpr.
+    # conditionExpr: expression;
     def visitConditionExpr(self, ctx: BKITParser.ConditionExprContext):
         return self.visitChildren(ctx)
 
-    # updateExpr.
+    # updateExpr: expression;
     def visitUpdateExpr(self, ctx: BKITParser.UpdateExprContext):
         return self.visitChildren(ctx)
 
@@ -153,11 +158,12 @@ class ASTGeneration(BKITVisitor):
 
     # functionCall SEMI
     def visitCallStatement(self, ctx: BKITParser.CallStatementContext):
-        return self.visit(ctx.functionCall())
+        idList, expList = self.visit(ctx.functionCall())
+        return CallStmt(idList, expList)
 
     # Identifier LB argumentList? RB
     def visitFunctionCall(self, ctx: BKITParser.FunctionCallContext):
-        return CallStmt(
+        return (
             Id(ctx.Identifier().getText()),
             self.visit(ctx.argumentList()) if ctx.argumentList() else []
         )
@@ -176,13 +182,13 @@ class ASTGeneration(BKITVisitor):
     # //===== EXPRESSIONS =====//
     # logicalOrAndExpression relationalOperator logicalOrAndExpression | logicalOrAndExpression
     def visitExpression(self, ctx: BKITParser.ExpressionContext):
-        if ctx.relationalOperator():
-            op = self.visit(ctx.relationalOperator())
-            left = self.visit(ctx.logicalOrAndExpression(0))
-            right = self.visit(ctx.logicalOrAndExpression(1))
-            return BinaryOp(op, left, right)
-        else:
-            return self.visit(ctx.logicalOrAndExpression(0))
+        left = self.visit(ctx.logicalOrAndExpression(0))
+        opt = self.visit(ctx.relationalOperator()
+                         ) if ctx.relationalOperator() else None
+        return (
+            left if not opt else
+            BinaryOp(opt, left, self.visit(ctx.logicalOrAndExpression(1)))
+        )
 
     # Visit a parse tree produced by BKITParser#relationalOperator.
     def visitRelationalOperator(self, ctx: BKITParser.RelationalOperatorContext):
@@ -190,13 +196,13 @@ class ASTGeneration(BKITVisitor):
 
     # logicalOrAndExpression logicalOrAndOperator additiveExpression | additiveExpression
     def visitLogicalOrAndExpression(self, ctx: BKITParser.LogicalOrAndExpressionContext):
-        if ctx.logicalOrAndOperator():
-            op = self.visit(ctx.logicalOrAndOperator())
-            left = self.visit(ctx.logicalOrAndExpression())
-            right = self.visit(ctx.additiveExpression())
-            return BinaryOp(op, left, right)
-        else:
-            return self.visit(ctx.additiveExpression())
+        right = self.visit(ctx.additiveExpression())
+        opt = self.visit(ctx.logicalOrAndOperator()
+                         ) if ctx.logicalOrAndOperator() else None
+        return (
+            right if not opt else
+            BinaryOp(opt, self.visit(ctx.logicalOrAndExpression()), right)
+        )
 
     # logicalOrAndOperator.
     def visitLogicalOrAndOperator(self, ctx: BKITParser.LogicalOrAndOperatorContext):
@@ -248,23 +254,19 @@ class ASTGeneration(BKITVisitor):
     def visitSignOperator(self, ctx: BKITParser.SignOperatorContext):
         return ctx.getChild(0).getText()
 
-    # indexExpression indexOperator | funcExpression
+    # indexExpression indexOperator+ | primaryExpression
     def visitIndexExpression(self, ctx: BKITParser.IndexExpressionContext):
+        optList = reduce(
+            lambda x, y: x + [self.visit(y)], ctx.indexOperator(), []
+        )
         return (
-            UnaryOp(self.visit(ctx.indexOperator()), self.visit(ctx.indexExpression)) if ctx.indexOperator() else
-            self.visit(ctx.funcExpression())
+            ArrayCell(self.visit(ctx.indexExpression()), optList) if ctx.indexOperator() else
+            self.visit(ctx.primaryExpression())
         )
 
     # LSB expression RSB
     def visitIndexOperator(self, ctx: BKITParser.IndexOperatorContext):
         return self.visit(ctx.expression())
-    # primaryExpression LSB expression RSB | primaryExpression
-
-    def visitFuncExpression(self, ctx: BKITParser.FuncExpressionContext):
-        return (
-            ArrayCell(self.visit(ctx.primaryExpression()), [self.visit(ctx.expression())]) if ctx.expression() else
-            self.visit(ctx.primaryExpression())
-        )
 
     # primaryExpression.
     def visitPrimaryExpression(self, ctx: BKITParser.PrimaryExpressionContext):
@@ -272,13 +274,20 @@ class ASTGeneration(BKITVisitor):
             self.visit(ctx.expression()) if ctx.expression() else
             Id(ctx.Identifier().getText()) if ctx.Identifier() else
             self.visit(ctx.literals()) if ctx.literals() else
-            self.visit(ctx.functionCall())
+            self.visit(ctx.callExpr())
+        )
+
+    # callExpr
+    def visitCallExpr(self, ctx: BKITParser.CallExprContext):
+        return CallExpr(
+            Id(ctx.Identifier().getText()),
+            self.visit(ctx.argumentList()) if ctx.argumentList() else []
         )
 
     # Visit a parse tree produced by BKITParser#literals.
     def visitLiterals(self, ctx: BKITParser.LiteralsContext):
         return (
-            IntLiteral(stoi(ctx.IntegerConstant().getText())) if ctx.IntegerConstant() else
+            IntLiteral(self.stoi(ctx.IntegerConstant().getText())) if ctx.IntegerConstant() else
             FloatLiteral(float(ctx.FloatingConstant().getText())) if ctx.FloatingConstant() else
             StringLiteral(ctx.String().getText()) if ctx.String() else
             self.visitBoolean(ctx) if ctx.boolean() else
@@ -296,3 +305,10 @@ class ASTGeneration(BKITVisitor):
     # Visit a parse tree produced by BKITParser#assignmentOperator.
     def visitAssignmentOperator(self, ctx: BKITParser.AssignmentOperatorContext):
         return self.visitChildren(ctx)
+
+    def stoi(self, num: str):
+        return (
+            int(num, 8) if '0o' in num or '0O' in num else
+            int(num, 16) if '0x' in num or '0X' in num else
+            int(num)
+        )

@@ -19,13 +19,18 @@ class MCVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by MCParser#vardecltail.
+    def visitVardecltail(self, ctx:MCParser.VardecltailContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by MCParser#vardecl.
     def visitVardecl(self, ctx:MCParser.VardeclContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MCParser#mctype.
-    def visitMctype(self, ctx:MCParser.MctypeContext):
+    # Visit a parse tree produced by MCParser#mptype.
+    def visitMptype(self, ctx:MCParser.MptypeContext):
         return self.visitChildren(ctx)
 
 

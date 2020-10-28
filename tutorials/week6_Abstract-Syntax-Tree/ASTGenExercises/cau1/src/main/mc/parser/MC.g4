@@ -26,33 +26,21 @@ options{
 
 program: vardecls EOF;
 
-vardecls: vardecl vardecls | vardecl ;
+vardecls: vardecl vardecltail;
 
-vardecl: mctype ids SEMI ;
+vardecltail: vardecl vardecltail | ;
 
-mctype: INTTYPE | FLOATTYPE | ARRAY LB INTLIT RB OF mctype ;
+vardecl: mptype ids ';' ;
 
-ids: ID (COMMA ID)* ;
+mptype: INTTYPE | FLOATTYPE;
 
-ARRAY: 'array';
+ids: ID ',' ids | ID; 
 
-OF: 'of';
+INTTYPE: 'int';
 
-INTTYPE: 'int' ;
+FLOATTYPE: 'float';
 
-FLOATTYPE: 'float' ;
-
-ID: [a-zA-Z]+ ;
-
-INTLIT: [0-9]+;
-
-LB: '[' ;
-
-RB: ']' ;
-
-COMMA: ',';
-
-SEMI: ';' ;
+ID: [a-z]+ ;
 
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
 

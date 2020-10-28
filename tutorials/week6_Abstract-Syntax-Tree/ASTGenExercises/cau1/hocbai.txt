@@ -1,0 +1,6 @@
+b1: visit node non-terminal
+node ra mang hay ra 1 phan tu, neu ra mang thi xai cau truc
+[func(x, y) for x in ctx.id()] (ebnf)
+
+return [Id(ctx.ID().getText())] if ctx.getChildCount() == 1 else [Id(ctx.ID().getText())] + self.visit(ctx.ids())
+khi visit node con check xem ra mang hay ra 1

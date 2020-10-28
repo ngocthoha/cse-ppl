@@ -219,13 +219,13 @@ class BKITVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BKITParser#funcExpression.
-    def visitFuncExpression(self, ctx:BKITParser.FuncExpressionContext):
+    # Visit a parse tree produced by BKITParser#primaryExpression.
+    def visitPrimaryExpression(self, ctx:BKITParser.PrimaryExpressionContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by BKITParser#primaryExpression.
-    def visitPrimaryExpression(self, ctx:BKITParser.PrimaryExpressionContext):
+    # Visit a parse tree produced by BKITParser#callExpr.
+    def visitCallExpr(self, ctx:BKITParser.CallExprContext):
         return self.visitChildren(ctx)
 
 
