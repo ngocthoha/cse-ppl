@@ -1,0 +1,26 @@
+How to Describe a Programming Language
+- Three major areas: grammar, sematics, pragmatics
+- Grammar:
++ lexical: uses alphabet, identifies the sequence of symbols constituting the words (or token).
++ syntax: describes sequences of words constitute legal phrases.
+- Semantics: attributes a significance to every correct phrase. "What does a correct phracse mean?"
+- Pragmatics: linguistic mechanisms "How fo we use a meaningful sentence?"
+
+
+DFA: M = (m1,m2,m3,m4,m5)
++ m1 a finite set of state
++ m2 alphabet
++ m4 the initial state
++ m5 the set of final states
++ m3 a transition function from m1xm2 to m1
+
+
+BNF: exp -> exp '+' term
+	| exp '-' term
+	| term
+	
+EBNF: term (('+'|'-') term)*
+ANTLR: exp: term (('+'|'-') term)*
+
+Ambiguous grammar:
+

@@ -29,24 +29,23 @@ program: variableStatement* funcDeclaration* EOF;
 //Variable Statement
 variableStatement: VAR COLON varList SEMI;
 varList: varDeclaration (COMMA varDeclaration)*;
-varDeclaration:
-	Identifier (LSB IntegerConstant RSB)* (ASSIGN literals)?;
+varDeclaration: Identifier (LSB IntegerConstant RSB)* (ASSIGN literals)?;
 
 //Function Declaraton
-funcDeclaration:
-	FUNCTION COLON Identifier (PARAMETER COLON paraList)? funcBody;
+funcDeclaration:FUNCTION COLON Identifier (PARAMETER COLON paraList)? funcBody;
 paraList: parameters (COMMA parameters)*;
 parameters: Identifier (LSB IntegerConstant RSB)*;
 funcBody: BODY COLON statementList ENDBODY DOT;
 //===== STATEMENTS =====//
 statementList: variableStatement* statement*;
-statement:
-	assignmentStatement
-	| iterationStatement
-	| jumpStatement
-	| callStatement
-	| returnStatement
-	| ifStatement;
+statement
+	:assignmentStatement
+	|iterationStatement
+	|jumpStatement
+	|callStatement
+	|returnStatement
+	|ifStatement
+	;
 //AssignmentStatement
 assignmentStatement: assignDeclaration ASSIGN expression SEMI;
 assignDeclaration: (Identifier | functionCall) indexOperator*;
@@ -86,52 +85,61 @@ argumentList: argumentList COMMA expression | expression;
 //Return Statement
 returnStatement: RETURN expression? SEMI;
 //===== EXPRESSIONS =====//
-expression:
-	logicalOrAndExpression relationalOperator logicalOrAndExpression
-	| logicalOrAndExpression;
-relationalOperator:
-	EQ
-	| NE
-	| NEF
-	| LE
-	| LEF
-	| LT
-	| LTF
-	| GE
-	| GEF
-	| GT
-	| GTF;
-logicalOrAndExpression:
-	logicalOrAndExpression logicalOrAndOperator additiveExpression
-	| additiveExpression;
+expression
+	:logicalOrAndExpression relationalOperator logicalOrAndExpression
+	|logicalOrAndExpression;
+relationalOperator
+	:EQ
+	|NE
+	|NEF
+	|LE
+	|LEF
+	|LT
+	|LTF
+	|GE
+	|GEF
+	|GT
+	|GTF
+	;
+logicalOrAndExpression
+	:logicalOrAndExpression logicalOrAndOperator additiveExpression
+	|additiveExpression;
 logicalOrAndOperator: OR | AND;
-additiveExpression:
-	additiveExpression additiveOperator multiplicativeExpression
-	| multiplicativeExpression;
+additiveExpression
+	:additiveExpression additiveOperator multiplicativeExpression
+	|multiplicativeExpression;
 additiveOperator: SUB | SUBF | ADD | ADDF;
-multiplicativeExpression:
-	multiplicativeExpression multiplicativeOperator logicalNotExpression
-	| logicalNotExpression;
+multiplicativeExpression
+	:multiplicativeExpression multiplicativeOperator logicalNotExpression
+	|logicalNotExpression
+	;
 multiplicativeOperator: MUL | MULF | DIV | DIVF | MOD;
-logicalNotExpression: NOT logicalNotExpression | signExpression;
+logicalNotExpression
+	:NOT logicalNotExpression
+	|signExpression;
 signExpression: signOperator signExpression | indexExpression;
 signOperator: SUB | SUBF;
-indexExpression:
-	indexExpression indexOperator+
-	| primaryExpression;
-indexOperator: LSB expression RSB;
-primaryExpression:
-	Identifier
-	| literals
-	| callExpr
-	| LB expression RB;
+indexExpression
+	:indexExpression indexOperator+
+	|primaryExpression
+	;
+indexOperator
+	:LSB expression RSB
+	;
+primaryExpression
+	:Identifier
+	|literals
+	|callExpr
+	|LB expression RB
+	;
 callExpr: Identifier LB argumentList? RB;
-literals:
-	IntegerConstant
-	| FloatingConstant
-	| String
-	| boolean
-	| array;
+literals
+	:IntegerConstant
+	|FloatingConstant
+	|String
+	|boolean
+	|array
+	;
 boolean: TRUE | FALSE;
 array: LP literals (COMMA literals)* RP;
 assignmentOperator: ASSIGN;
@@ -144,10 +152,8 @@ fragment Uppercase: [A-Z];
 fragment Digit: [0-9];
 fragment Letters: Lowercase | Uppercase;
 fragment DecimalConstant: '0' | NonzeroDigit Digit*;
-fragment OctalConstant:
-	OctalPrefix NonzeroOctalDigit OctalDigit*;
-fragment HexadecimalContant:
-	HexPrefix NonzeroHexDigit HexDigit*;
+fragment OctalConstant: OctalPrefix NonzeroOctalDigit OctalDigit*;
+fragment HexadecimalContant: HexPrefix NonzeroHexDigit HexDigit*;
 fragment NonzeroDigit: [1-9];
 fragment OctalDigit: [0-7];
 fragment NonzeroOctalDigit: [1-7];
